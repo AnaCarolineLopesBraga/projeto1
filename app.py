@@ -1,7 +1,8 @@
 import os
-restaurantes=[{"nome": "𝕔𝕒𝕓𝕖𝕔̧𝕒 𝕕𝕖 𝕘𝕖𝕝𝕠", "categoria": "almoço", 'ativo':True},
-              {"nome": "WWII", "categoria":"lanches", "ativo":False},
-              {"nome": "TI", 'categoria':"bar", "ativo":False}]
+restaurantes=[{'nome': 'Tempero Salgado', 'categoria': 'Salgada','ativo':False}, 
+              {'nome': 'Tempero Mineiro', 'categoria': 'Mineira','ativo':True},
+              {'nome': 'Sushi Nadya', 'categoria': 'Japonesa','ativo':False}
+              ]
 
 def exibir_nome_do_programa():
   
@@ -15,17 +16,22 @@ def exibir_opções():
        
 def Encerrando_programa():
     exibir_subtitulo("encerrando programa")
-    voltar_ao_menu_principal()
     
 def opção_invalida():
     print('Opção invalida"!\n')
     voltar_ao_menu_principal()
 
 def cadastrar_novo_restaurante():
-    exibir_subtitulo("cadastrando novo restaurante")
-    nome_do_restaurante = input('digite o nome do restaurante que deseja cadastrar:')
-    restaurantes.append(nome_do_restaurante)
-    print(f'o restaurante {nome_do_restaurante} foi cadastrado com sucesso!')
+    '''Essa função é responsavel por cadastrar um novo restaurante'''
+
+    exibir_subtitulo('Cadastro de novos restaurantes')
+    
+    nome_do_restaurante = input('Digite o nome do restaurante que deseja cadastrar: ')
+    categoria = input(f'Digite o nome da categoria do restaurante {nome_do_restaurante}: ')
+    dados_do_restaurante ={'nome': nome_do_restaurante,'categoria': categoria, 'ativo':False}
+    restaurantes.append(dados_do_restaurante)
+    print(f'O restaurante {nome_do_restaurante} foi cadastrado com sucesso!')
+
     voltar_ao_menu_principal()
 
 def voltar_ao_menu_principal():
@@ -33,11 +39,15 @@ def voltar_ao_menu_principal():
       main()
 
 def listar_restaurantes():
-    exibir_subtitulo("listando restaurantes")
+    exibir_subtitulo('Listando os restaurantes')
 
+    print(f'{'Nome do restaurante'.ljust(23)} | {'Categoria'.ljust(20)} | Status\n')
     for restaurante in restaurantes:
-        nome_restaurante=restaurante['nome']
-        print(f' - .{nome_restaurante}')
+        nome_restaurante = restaurante['nome']
+        categoria = restaurante['categoria']
+        ativo = 'ativado' if restaurante['ativo'] else 'desativado'
+        print(f' - {nome_restaurante.ljust(20)} | {categoria.ljust(20)} | {ativo}')
+
     voltar_ao_menu_principal()
 
 def exibir_subtitulo(texto):
